@@ -1,9 +1,7 @@
+import { Button } from "./_components/ui/button";
+
 const Home = () => {
-  return (
-    <div className="flex w-screen items-center justify-center text-red-500">
-      Hello World!
-    </div>
-  );
+  return <Button>Hello world</Button>;
 };
 
 export default Home;
