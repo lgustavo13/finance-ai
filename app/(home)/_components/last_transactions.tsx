@@ -81,7 +81,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
         ) : (
           <div className="flex flex-col items-center">
             <p className="text-muted-foreground">
-              Nenhuma transação cadastrada!
+              Nenhuma transação cadastrada.
             </p>
           </div>
         )}

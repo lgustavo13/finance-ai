@@ -34,7 +34,7 @@ const ExpensesPerCategory = ({
           ))
         ) : (
           <div className="flex flex-col items-center">
-            <p className="text-muted-foreground">Nenhum gasto cadastrado!</p>
+            <p className="text-muted-foreground">Nenhum gasto cadastrado.</p>
           </div>
         )}
       </CardContent>
