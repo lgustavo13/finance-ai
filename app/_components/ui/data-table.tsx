@@ -46,6 +46,47 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const paginationButton = () => (
+    <>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.firstPage()}
+        disabled={!table.getCanPreviousPage()}
+      >
+        Primeira página
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.previousPage()}
+        disabled={!table.getCanPreviousPage()}
+      >
+        Anterior
+      </Button>
+      <div className="text-sm font-medium">
+        Página {table.getState().pagination.pageIndex + 1} de{" "}
+        {table.getPageCount()}
+      </div>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.nextPage()}
+        disabled={!table.getCanNextPage()}
+      >
+        Próxima
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.lastPage()}
+        disabled={!table.getCanNextPage()}
+      >
+        Última página
+      </Button>
+    </>
+  );
+
   return (
     <>
       <div className="rounded-md border">
@@ -115,26 +156,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Anterior
-        </Button>
-        <div className="text-sm font-medium">
-          Página {table.getState().pagination.pageIndex + 1} de{" "}
-          {table.getPageCount()}
-        </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Próximo
-        </Button>
+        {paginationButton()}
       </div>
     </>
   );
