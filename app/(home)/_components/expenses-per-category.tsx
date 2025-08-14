@@ -18,19 +18,25 @@ const ExpensesPerCategory = ({
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {expensesPerCategory.map((catergory) => (
-          <div key={catergory.category} className="space-y-2">
-            <div className="flex w-full justify-between">
-              <p className="text-sm font-bold">
-                {TRANSACTION_CATEGORY_LABELS[catergory.category]}
-              </p>
-              <p className="text-sm font-bold">
-                {catergory.percentageOfTotal}%
-              </p>
+        {expensesPerCategory.length > 0 ? (
+          expensesPerCategory.map((catergory) => (
+            <div key={catergory.category} className="space-y-2">
+              <div className="flex w-full justify-between">
+                <p className="text-sm font-bold">
+                  {TRANSACTION_CATEGORY_LABELS[catergory.category]}
+                </p>
+                <p className="text-sm font-bold">
+                  {catergory.percentageOfTotal}%
+                </p>
+              </div>
+              <Progress value={catergory.percentageOfTotal} />
             </div>
-            <Progress value={catergory.percentageOfTotal} />
+          ))
+        ) : (
+          <div className="flex flex-col items-center">
+            <p className="text-muted-foreground">Nenhum gasto cadastrado!</p>
           </div>
-        ))}
+        )}
       </CardContent>
     </ScrollArea>
   );

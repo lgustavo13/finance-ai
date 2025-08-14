@@ -42,39 +42,49 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {lastTransactions.map((transaction) => (
-          <div
-            key={transaction.id}
-            className="flex items-center justify-between"
-          >
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-white/[3%] p-3">
-                <Image
-                  src={
-                    TRANSACTION_PAYMENT_METHOD_ICONS[transaction.paymentMethod]
-                  }
-                  width={20}
-                  height={20}
-                  alt="PIX"
-                />
+        {lastTransactions.length > 0 ? (
+          lastTransactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="flex items-center justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-white/[3%] p-3">
+                  <Image
+                    src={
+                      TRANSACTION_PAYMENT_METHOD_ICONS[
+                        transaction.paymentMethod
+                      ]
+                    }
+                    width={20}
+                    height={20}
+                    alt="PIX"
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">{transaction.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {new Date(transaction.date).toLocaleDateString("pt-BR", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-bold">{transaction.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {new Date(transaction.date).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
-              </div>
+              <p className={`text-sm font-bold ${getAmountCOlor(transaction)}`}>
+                {getAmountPrefix(transaction)}
+                {formatCurrency(Number(transaction.amount))}
+              </p>
             </div>
-            <p className={`text-sm font-bold ${getAmountCOlor(transaction)}`}>
-              {getAmountPrefix(transaction)}
-              {formatCurrency(Number(transaction.amount))}
+          ))
+        ) : (
+          <div className="flex flex-col items-center">
+            <p className="text-muted-foreground">
+              Nenhuma transação cadastrada!
             </p>
           </div>
-        ))}
+        )}
       </CardContent>
     </ScrollArea>
   );
