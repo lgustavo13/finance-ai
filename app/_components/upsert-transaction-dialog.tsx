@@ -34,9 +34,9 @@ import {
 import { DatePicker } from "./ui/date-picker";
 import { z } from "zod";
 import {
+  TransactionType,
   TransactionCategory,
   TransactionPaymentMethod,
-  TransactionType,
 } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,9 +44,9 @@ import { upsertTransaction } from "../_actions/upsert-transaction";
 
 interface UpsertTransactionDialogProps {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  transactionId?: string;
   defaultValues?: FormSchema;
+  transactionId?: string;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 const formSchema = z.object({
@@ -64,7 +64,7 @@ const formSchema = z.object({
     required_error: "O tipo é obrigatório.",
   }),
   category: z.nativeEnum(TransactionCategory, {
-    required_error: "A categoria é obrigatório.",
+    required_error: "A categoria é obrigatória.",
   }),
   paymentMethod: z.nativeEnum(TransactionPaymentMethod, {
     required_error: "O método de pagamento é obrigatório.",
@@ -78,9 +78,9 @@ type FormSchema = z.infer<typeof formSchema>;
 
 const UpsertTransactionDialog = ({
   isOpen,
-  setIsOpen,
-  transactionId,
   defaultValues,
+  transactionId,
+  setIsOpen,
 }: UpsertTransactionDialogProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -89,7 +89,7 @@ const UpsertTransactionDialog = ({
       category: TransactionCategory.OTHER,
       date: new Date(),
       name: "",
-      paymentMethod: TransactionPaymentMethod.OTHER,
+      paymentMethod: TransactionPaymentMethod.CASH,
       type: TransactionType.EXPENSE,
     },
   });
@@ -97,8 +97,8 @@ const UpsertTransactionDialog = ({
   const onSubmit = async (data: FormSchema) => {
     try {
       await upsertTransaction({ ...data, id: transactionId });
-      form.reset();
       setIsOpen(false);
+      form.reset();
     } catch (error) {
       console.error(error);
     }
@@ -122,7 +122,7 @@ const UpsertTransactionDialog = ({
           <DialogTitle>
             {isUpdate ? "Atualizar" : "Criar"} transação
           </DialogTitle>
-          <DialogDescription>Inserir informações abaixo</DialogDescription>
+          <DialogDescription>Insira as informações abaixo</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -173,7 +173,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione um tipo de pagamento" />
+                        <SelectValue placeholder="Selecione um tipo de pagamento..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -200,7 +200,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione a categoria" />
+                        <SelectValue placeholder="Selecione a categoria..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -227,7 +227,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione um método de pagamento" />
+                        <SelectValue placeholder="Selecione um método de pagamento..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>

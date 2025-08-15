@@ -40,7 +40,7 @@ const SummaryCard = async ({
         </p>
 
         {size === "large" && (
-          <AddTransactionButton userCarAddTransaction={userCanAddTransaction} />
+          <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         )}
       </CardContent>
     </Card>

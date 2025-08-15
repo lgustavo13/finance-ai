@@ -12,11 +12,11 @@ import {
 } from "./ui/tooltip";
 
 interface AddTransactionButtonProps {
-  userCarAddTransaction?: boolean;
+  userCanAddTransaction?: boolean;
 }
 
 const AddTransactionButton = ({
-  userCarAddTransaction,
+  userCanAddTransaction,
 }: AddTransactionButtonProps) => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
@@ -28,14 +28,14 @@ const AddTransactionButton = ({
             <Button
               className="rounded-full font-bold"
               onClick={() => setDialogIsOpen(true)}
-              disabled={!userCarAddTransaction}
+              disabled={!userCanAddTransaction}
             >
               Adicionar transação
               <ArrowDownUpIcon />
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            {!userCarAddTransaction &&
+            {!userCanAddTransaction &&
               "Você atingiu o limite de transações. Atualize seu plano para criar transações ilimitadas."}
           </TooltipContent>
         </Tooltip>

@@ -55,7 +55,7 @@ const TransactionsPage = async ({
           <div className="flex items-center gap-3">
             <TimeSelect />
             <AddTransactionButton
-              userCarAddTransaction={userCanAddTransaction}
+              userCanAddTransaction={userCanAddTransaction}
             />
           </div>
         </div>
