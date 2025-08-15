@@ -4,6 +4,7 @@ import { Mulish } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "sonner";
+import * as _clerk_types from "@clerk/types";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body className={`${mulish.className} dark antialiased`}>
         <ClerkProvider
           appearance={{
-            baseTheme: dark,
+            baseTheme: dark as _clerk_types.BaseThemeTaggedType,
           }}
         >
           <div className="flex h-full flex-col overflow-hidden">{children}</div>
