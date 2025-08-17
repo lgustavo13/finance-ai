@@ -9,6 +9,7 @@ import { ScrollArea } from "../_components/ui/scroll-area";
 import canUserAddTransaction from "../_data/can-user-add-transaction";
 import { isMatch } from "date-fns";
 import TimeSelect from "../(home)/_components/time-select";
+import MenuHamburguer from "../_components/menu-hamburguer";
 
 interface TransactionsProps {
   searchParams: {
@@ -49,6 +50,7 @@ const TransactionsPage = async ({
   return (
     <>
       <Navbar />
+      <MenuHamburguer />
       <div className="flex h-full flex-col gap-6 overflow-hidden p-6">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>

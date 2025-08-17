@@ -10,6 +10,7 @@ import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last_transactions";
 import canUserAddTransaction from "../_data/can-user-add-transaction";
 import AiReponrtButton from "./_components/ai-report-button";
+import MenuHamburguer from "../_components/menu-hamburguer";
 
 interface HomeProps {
   searchParams: {
@@ -36,6 +37,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   return (
     <>
       <Navbar />
+      <MenuHamburguer />
       <div className="flex flex-col space-y-6 overflow-hidden p-6">
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Dashboard</h1>
